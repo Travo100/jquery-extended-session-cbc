@@ -1,6 +1,7 @@
 //$("element you want to select").method()
 var counter = 0;
-
+var timer = 5;
+var audio = new Audio("assets/audio/sadtrombone.mp3");
 var questions = [
     {
         "question": "Is the sky blue?",
@@ -51,3 +52,16 @@ $(document).on("click", ".choice-btn", function(){
         alert("Incorrect! Try again!");
     }
 });
+
+var timerId = setInterval(function() {
+    timer--;
+    $("#timer").text(timer);
+    if(timer === 0) {
+        alert("time up!");
+        clearInterval(timerId);
+        counter = 0;
+        $("#questions-container").hide();
+        $("#timer").text("GAME OVER!");
+        audio.play();
+    }
+}, 1000);
